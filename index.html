@@ -2,30 +2,24 @@
 <html lang="fi">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mini ERP</title>
 
-    <link
-        rel="stylesheet"
-        href="style.css">
-
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
     <h1>Mini ERP</h1>
 
+    <!-- Tuotteen lisääminen -->
+
     <section>
 
         <h2>Lisää uusi tuote</h2>
 
-        <form>
+        <form id="productForm">
 
             <label for="productName">
                 Tuotteen nimi
@@ -33,7 +27,8 @@
 
             <input
                 id="productName"
-                type="text">
+                type="text"
+                required>
 
             <label for="quantity">
                 Määrä
@@ -41,7 +36,9 @@
 
             <input
                 id="quantity"
-                type="number">
+                type="number"
+                min="0"
+                required>
 
             <label for="price">
                 Hinta (€)
@@ -50,9 +47,13 @@
             <input
                 id="price"
                 type="number"
-                step="0.01">
+                min="0"
+                step="0.01"
+                required>
 
-            <button>
+            <button
+                id="addProductButton"
+                type="submit">
 
                 Lisää tuote
 
@@ -62,39 +63,43 @@
 
     </section>
 
+    <!-- Haku -->
+
     <section>
 
         <h2>Haku</h2>
 
         <input
+            id="searchInput"
             type="text"
             placeholder="Hae tuotetta">
 
     </section>
 
+    <!-- Tuotetaulukko -->
+
     <section>
 
         <h2>Tuotteet</h2>
 
-        <table>
+        <table id="productTable">
 
             <thead>
 
                 <tr>
 
                     <th>Tuote</th>
-
                     <th>Määrä</th>
-
-                    <th>Hinta</th>
-
+                    <th>Hinta (€)</th>
                     <th>Toiminnot</th>
 
                 </tr>
 
             </thead>
 
-            <tbody>
+            <tbody id="productTableBody">
+
+                <!-- JavaScript lisää tuotteet tähän -->
 
             </tbody>
 
