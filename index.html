@@ -13,72 +13,76 @@
 
     <h1>Mini ERP</h1>
 
-    <!-- Tuotteen lisääminen -->
+    <div class="top-container">
 
-    <section>
+        <!-- Lisää uusi tuote -->
 
-        <h2>Lisää uusi tuote</h2>
+        <section class="card">
 
-        <form id="productForm">
+            <h2>Lisää uusi tuote</h2>
 
-            <label for="productName">
-                Tuotteen nimi
-            </label>
+            <form id="productForm">
+
+                <label for="productName">
+                    Tuotteen nimi
+                </label>
+
+                <input
+                    id="productName"
+                    type="text"
+                    required>
+
+                <label for="quantity">
+                    Määrä
+                </label>
+
+                <input
+                    id="quantity"
+                    type="number"
+                    min="0"
+                    required>
+
+                <label for="price">
+                    Hinta (€)
+                </label>
+
+                <input
+                    id="price"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    required>
+
+                <button
+                    id="addProductButton"
+                    type="submit">
+
+                    Lisää tuote
+
+                </button>
+
+            </form>
+
+        </section>
+
+        <!-- Haku -->
+
+        <section class="card">
+
+            <h2>Haku</h2>
 
             <input
-                id="productName"
+                id="searchInput"
                 type="text"
-                required>
+                placeholder="Hae tuotetta">
 
-            <label for="quantity">
-                Määrä
-            </label>
+        </section>
 
-            <input
-                id="quantity"
-                type="number"
-                min="0"
-                required>
-
-            <label for="price">
-                Hinta (€)
-            </label>
-
-            <input
-                id="price"
-                type="number"
-                min="0"
-                step="0.01"
-                required>
-
-            <button
-                id="addProductButton"
-                type="submit">
-
-                Lisää tuote
-
-            </button>
-
-        </form>
-
-    </section>
-
-    <!-- Haku -->
-
-    <section>
-
-        <h2>Haku</h2>
-
-        <input
-            id="searchInput"
-            type="text"
-            placeholder="Hae tuotetta">
-
-    </section>
+    </div>
 
     <!-- Tuotetaulukko -->
 
-    <section>
+    <section class="card">
 
         <h2>Tuotteet</h2>
 
