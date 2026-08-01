@@ -13,6 +13,11 @@ const productCount = document.getElementById("productCount");
 const totalQuantity = document.getElementById("totalQuantity");
 const inventoryValue = document.getElementById("inventoryValue");
 const averagePrice = document.getElementById("averagePrice");
+const sortSelect = document.getElementById("sortSelect");
+const chartCanvas =
+    document.getElementById("inventoryChart");
+
+let inventoryChart;
 
 // =========================
 // Sovelluksen data
@@ -27,6 +32,7 @@ let editingIndex = null;
 
 productForm.addEventListener("submit", handleFormSubmit);
 searchInput.addEventListener("input", filterProducts);
+sortSelect.addEventListener("change", sortProducts);
 
 // =========================
 // Käynnistys
@@ -89,6 +95,7 @@ function renderProducts() {
     });
 
     updateDashboard();
+    updateChart();
 
 }
 
@@ -194,6 +201,100 @@ function updateDashboard() {
     averagePrice.textContent = average.toLocaleString("fi-FI", {
         style: "currency",
         currency: "EUR"
+    });
+
+}
+
+function sortProducts() {
+
+    switch (sortSelect.value) {
+
+        case "nameAsc":
+
+            products.sort((a, b) =>
+                a.name.localeCompare(b.name)
+            );
+
+            break;
+
+        case "nameDesc":
+
+            products.sort((a, b) =>
+                b.name.localeCompare(a.name)
+            );
+
+            break;
+
+        case "priceAsc":
+
+            products.sort((a, b) =>
+                a.price - b.price
+            );
+
+            break;
+
+        case "priceDesc":
+
+            products.sort((a, b) =>
+                b.price - a.price
+            );
+
+            break;
+
+        case "quantityAsc":
+
+            products.sort((a, b) =>
+                a.quantity - b.quantity
+            );
+
+            break;
+
+        case "quantityDesc":
+
+            products.sort((a, b) =>
+                b.quantity - a.quantity
+            );
+
+            break;
+
+    }
+
+    renderProducts();
+
+}
+
+function updateChart() {
+
+    if (inventoryChart) {
+
+        inventoryChart.destroy();
+
+    }
+
+    inventoryChart = new Chart(chartCanvas, {
+
+        type: "bar",
+
+        data: {
+
+            labels: products.map(product => product.name),
+
+            datasets: [
+
+                {
+
+                    label: "Varaston arvo (€)",
+
+                    data: products.map(product =>
+                        product.quantity * product.price
+                    )
+
+                }
+
+            ]
+
+        }
+
     });
 
 }

@@ -50,6 +50,40 @@
         placeholder="🔍 Hae tuotteita..."
     >
 
+    <div class="toolbar">
+
+    <label for="sortSelect">Järjestä:</label>
+
+    <select id="sortSelect">
+
+        <option value="nameAsc">
+            Nimen mukaan (A–Ö)
+        </option>
+
+        <option value="nameDesc">
+            Nimen mukaan (Ö–A)
+        </option>
+
+        <option value="priceAsc">
+            Hinta (halvin)
+        </option>
+
+        <option value="priceDesc">
+            Hinta (kallein)
+        </option>
+
+        <option value="quantityAsc">
+            Määrä (pienin)
+        </option>
+
+        <option value="quantityDesc">
+            Määrä (suurin)
+        </option>
+
+    </select>
+
+    </div>
+
     <!-- DASHBOARD -->
 
     <section class="dashboard">
@@ -76,6 +110,12 @@
 
     </section>
 
+    <section class="chartContainer">
+
+        <canvas id="inventoryChart"></canvas>
+
+    </section>
+
     <table>
 
         <thead>
@@ -95,6 +135,7 @@
 
     </table>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="script.js"></script>
 
 </body>
