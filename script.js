@@ -9,6 +9,8 @@ const priceInput = document.getElementById("price");
 const productTableBody = document.getElementById("productTableBody");
 const searchInput = document.getElementById("searchInput");
 
+let products = [];
+
 // =========================
 // Tapahtumat
 // =========================
@@ -26,7 +28,11 @@ function handleFormSubmit(event) {
 
     const product = getProductData();
 
-    createProductRow(product);
+    products.push(product);
+
+    saveProducts();
+
+    renderProducts();
 
     clearForm();
 
@@ -69,15 +75,25 @@ function createProductRow(product) {
 
     deleteButton.addEventListener("click", function () {
 
-        const confirmDelete = confirm(
-            "Haluatko varmasti poistaa tuotteen?"
-        );
+    const confirmDelete = confirm(
+        "Haluatko varmasti poistaa tuotteen?"
+    );
 
-        if (confirmDelete) {
-            row.remove();
-        }
+    if (confirmDelete) {
 
-    });
+        products = products.filter(function (item) {
+
+            return item !== product;
+
+        });
+
+        saveProducts();
+
+        renderProducts();
+
+    }
+
+});
 
     productTableBody.appendChild(row);
 
@@ -90,6 +106,43 @@ function clearForm() {
     productForm.reset();
 
 }
+
+function saveProducts() {
+
+    localStorage.setItem(
+        "products",
+        JSON.stringify(products)
+    );
+
+}
+
+function loadProducts() {
+
+    const savedProducts = localStorage.getItem("products");
+
+    if (savedProducts) {
+
+        products = JSON.parse(savedProducts);
+
+    }
+
+}
+
+function renderProducts() {
+
+    productTableBody.innerHTML = "";
+
+    products.forEach(function (product) {
+
+        createProductRow(product);
+
+    });
+
+}
+
+loadProducts();
+
+renderProducts();
 
 function filterProducts() {
 
