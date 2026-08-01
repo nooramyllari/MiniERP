@@ -9,7 +9,12 @@ const priceInput = document.getElementById("price");
 const productTableBody = document.getElementById("productTableBody");
 const searchInput = document.getElementById("searchInput");
 
+// =========================
+// Sovelluksen data
+// =========================
+
 let products = [];
+let editingIndex = null;
 
 // =========================
 // Tapahtumat
@@ -17,6 +22,13 @@ let products = [];
 
 productForm.addEventListener("submit", handleFormSubmit);
 searchInput.addEventListener("input", filterProducts);
+
+// =========================
+// Käynnistys
+// =========================
+
+loadProducts();
+renderProducts();
 
 // =========================
 // Funktiot
@@ -28,17 +40,28 @@ function handleFormSubmit(event) {
 
     const product = getProductData();
 
-    products.push(product);
+    if (editingIndex === null) {
+
+        // Lisätään uusi tuote
+        products.push(product);
+
+    } else {
+
+        // Päivitetään olemassa oleva tuote
+        products[editingIndex] = product;
+
+        editingIndex = null;
+
+        document.querySelector("button[type='submit']").textContent =
+            "Lisää tuote";
+
+    }
 
     saveProducts();
-
     renderProducts();
-
     clearForm();
 
 }
-
-// -------------------------
 
 function getProductData() {
 
@@ -54,9 +77,19 @@ function getProductData() {
 
 }
 
-// -------------------------
+function renderProducts() {
 
-function createProductRow(product) {
+    productTableBody.innerHTML = "";
+
+    products.forEach(function (product, index) {
+
+        createProductRow(product, index);
+
+    });
+
+}
+
+function createProductRow(product, index) {
 
     const row = document.createElement("tr");
 
@@ -65,84 +98,70 @@ function createProductRow(product) {
         <td>${product.quantity}</td>
         <td>${product.price.toFixed(2)} €</td>
         <td>
+            <button class="editButton">
+                Muokkaa
+            </button>
+
             <button class="deleteButton">
                 Poista
             </button>
         </td>
     `;
 
+    const editButton = row.querySelector(".editButton");
     const deleteButton = row.querySelector(".deleteButton");
+
+    // =========================
+    // Muokkaa
+    // =========================
+
+    editButton.addEventListener("click", function () {
+
+        productNameInput.value = product.name;
+        quantityInput.value = product.quantity;
+        priceInput.value = product.price;
+
+        editingIndex = index;
+
+        document.querySelector("button[type='submit']").textContent =
+            "Päivitä tuote";
+
+    });
+
+    // =========================
+    // Poista
+    // =========================
 
     deleteButton.addEventListener("click", function () {
 
-    const confirmDelete = confirm(
-        "Haluatko varmasti poistaa tuotteen?"
-    );
+        const confirmDelete = confirm(
+            "Haluatko varmasti poistaa tuotteen?"
+        );
 
-    if (confirmDelete) {
+        if (confirmDelete) {
 
-        products = products.filter(function (item) {
+            products = products.filter(function (item) {
 
-            return item !== product;
+                return item !== product;
 
-        });
+            });
 
-        saveProducts();
+            saveProducts();
+            renderProducts();
 
-        renderProducts();
+        }
 
-    }
-
-});
+    });
 
     productTableBody.appendChild(row);
 
 }
-
-// -------------------------
 
 function clearForm() {
 
     productForm.reset();
 
 }
-
-function saveProducts() {
-
-    localStorage.setItem(
-        "products",
-        JSON.stringify(products)
-    );
-
-}
-
-function loadProducts() {
-
-    const savedProducts = localStorage.getItem("products");
-
-    if (savedProducts) {
-
-        products = JSON.parse(savedProducts);
-
-    }
-
-}
-
-function renderProducts() {
-
-    productTableBody.innerHTML = "";
-
-    products.forEach(function (product) {
-
-        createProductRow(product);
-
-    });
-
-}
-
-loadProducts();
-
-renderProducts();
 
 function filterProducts() {
 
@@ -165,5 +184,26 @@ function filterProducts() {
         }
 
     });
+
+}
+
+function saveProducts() {
+
+    localStorage.setItem(
+        "products",
+        JSON.stringify(products)
+    );
+
+}
+
+function loadProducts() {
+
+    const savedProducts = localStorage.getItem("products");
+
+    if (savedProducts) {
+
+        products = JSON.parse(savedProducts);
+
+    }
 
 }

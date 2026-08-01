@@ -1,12 +1,18 @@
 # Mini ERP
 
-Yksinkertainen varastonhallintasovellus, joka on luotu web-kehityksen opettelua varten.
+Yksinkertainen selainpohjainen varastonhallintasovellus, joka on luotu web-kehityksen opettelua varten.
 
 ## Teknologiat
 
 - HTML
 - CSS
 - JavaScript
+
+## Kehitysympäristö
+
+- Visual Studio Code
+- Git
+- GitHub
 
 ## Ominaisuudet
 

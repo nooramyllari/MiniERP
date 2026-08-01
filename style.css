@@ -122,3 +122,27 @@ tbody tr:hover {
 .deleteButton:hover {
     background: #b02a37;
 }
+
+.editButton{
+
+    background:#0d6efd;
+
+    color:white;
+
+    border:none;
+
+    padding:8px 14px;
+
+    border-radius:6px;
+
+    cursor:pointer;
+
+    margin-right:8px;
+
+}
+
+.editButton:hover{
+
+    background:#0b5ed7;
+
+}
