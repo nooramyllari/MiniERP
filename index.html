@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="fi">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,106 +12,90 @@
 
     <h1>Mini ERP</h1>
 
-    <div class="top-container">
+    <form id="productForm">
 
-        <!-- Lisää uusi tuote -->
+        <label for="productName">Tuote</label>
+        <input
+            type="text"
+            id="productName"
+            required
+        >
 
-        <section class="card">
+        <label for="quantity">Määrä</label>
+        <input
+            type="number"
+            id="quantity"
+            required
+        >
 
-            <h2>Lisää uusi tuote</h2>
+        <label for="price">Hinta (€)</label>
+        <input
+            type="number"
+            id="price"
+            step="0.01"
+            required
+        >
 
-            <form id="productForm">
+        <button type="submit">
+            Lisää tuote
+        </button>
 
-                <label for="productName">
-                    Tuotteen nimi
-                </label>
+    </form>
 
-                <input
-                    id="productName"
-                    type="text"
-                    required>
+    <br>
 
-                <label for="quantity">
-                    Määrä
-                </label>
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="🔍 Hae tuotteita..."
+    >
 
-                <input
-                    id="quantity"
-                    type="number"
-                    min="0"
-                    required>
+    <!-- DASHBOARD -->
 
-                <label for="price">
-                    Hinta (€)
-                </label>
+    <section class="dashboard">
 
-                <input
-                    id="price"
-                    type="number"
-                    min="0"
-                    step="0.01"
-                    required>
+        <div class="card">
+            <h3>📦 Tuotteita</h3>
+            <p id="productCount">0</p>
+        </div>
 
-                <button
-                    id="addProductButton"
-                    type="submit">
+        <div class="card">
+            <h3>📦 Kpl yhteensä</h3>
+            <p id="totalQuantity">0</p>
+        </div>
 
-                    Lisää tuote
+        <div class="card">
+            <h3>💰 Varaston arvo</h3>
+            <p id="inventoryValue">0 €</p>
+        </div>
 
-                </button>
-
-            </form>
-
-        </section>
-
-        <!-- Haku -->
-
-        <section class="card">
-
-            <h2>Haku</h2>
-
-            <input
-                id="searchInput"
-                type="text"
-                placeholder="🔍 Hae tuotteita...">
-
-        </section>
-
-    </div>
-
-    <!-- Tuotetaulukko -->
-
-    <section class="card">
-
-        <h2>Tuotteet</h2>
-
-        <table id="productTable">
-
-            <thead>
-
-                <tr>
-
-                    <th>Tuote</th>
-                    <th>Määrä</th>
-                    <th>Hinta (€)</th>
-                    <th>Toiminnot</th>
-
-                </tr>
-
-            </thead>
-
-            <tbody id="productTableBody">
-
-                <!-- JavaScript lisää tuotteet tähän -->
-
-            </tbody>
-
-        </table>
+        <div class="card">
+            <h3>💵 Keskihinta</h3>
+            <p id="averagePrice">0 €</p>
+        </div>
 
     </section>
+
+    <table>
+
+        <thead>
+
+            <tr>
+                <th>Tuote</th>
+                <th>Määrä</th>
+                <th>Hinta</th>
+                <th>Toiminnot</th>
+            </tr>
+
+        </thead>
+
+        <tbody id="productTableBody">
+
+        </tbody>
+
+    </table>
 
     <script src="script.js"></script>
 
 </body>
-
 </html>
