@@ -7,12 +7,14 @@ const productNameInput = document.getElementById("productName");
 const quantityInput = document.getElementById("quantity");
 const priceInput = document.getElementById("price");
 const productTableBody = document.getElementById("productTableBody");
+const searchInput = document.getElementById("searchInput");
 
 // =========================
 // Tapahtumat
 // =========================
 
 productForm.addEventListener("submit", handleFormSubmit);
+searchInput.addEventListener("input", filterProducts);
 
 // =========================
 // Funktiot
@@ -86,5 +88,29 @@ function createProductRow(product) {
 function clearForm() {
 
     productForm.reset();
+
+}
+
+function filterProducts() {
+
+    const searchText = searchInput.value.toLowerCase();
+
+    const rows = productTableBody.querySelectorAll("tr");
+
+    rows.forEach(function (row) {
+
+        const productName = row.children[0].textContent.toLowerCase();
+
+        if (productName.includes(searchText)) {
+
+            row.style.display = "";
+
+        } else {
+
+            row.style.display = "none";
+
+        }
+
+    });
 
 }
