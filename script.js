@@ -56,8 +56,26 @@ function createProductRow(product) {
         <td>${product.name}</td>
         <td>${product.quantity}</td>
         <td>${product.price.toFixed(2)} €</td>
-        <td>-</td>
+        <td>
+            <button class="deleteButton">
+                Poista
+            </button>
+        </td>
     `;
+
+    const deleteButton = row.querySelector(".deleteButton");
+
+    deleteButton.addEventListener("click", function () {
+
+        const confirmDelete = confirm(
+            "Haluatko varmasti poistaa tuotteen?"
+        );
+
+        if (confirmDelete) {
+            row.remove();
+        }
+
+    });
 
     productTableBody.appendChild(row);
 

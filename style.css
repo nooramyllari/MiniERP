@@ -108,3 +108,17 @@ td {
 tbody tr:hover {
     background: #f2f2f2;
 }
+
+.deleteButton {
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.deleteButton:hover {
+    background: #b02a37;
+}
