@@ -35,3 +35,19 @@ Yksinkertainen selainpohjainen varastonhallintasovellus, jonka toteutin web-kehi
 - Gitin opettelu
 - GitHubin opettelu
 - Portfolioprojektin toteuttaminen
+
+## Kuvakaappauksia
+
+### Etusivu
+
+![ETUSIVU](screenshots/Etusivu.png)
+
+![ETUSIVU](screenshots/EtusivuKaavio.png)
+
+### Tuotteet lisätty
+
+![TUOTTEET LISÄTTY](screenshots/Tuotteet.png)
+
+### Kaavio ja luettelo
+
+![KAAVIO JA LUETTELO](screenshots/KaavioJaLuettelo.png)
