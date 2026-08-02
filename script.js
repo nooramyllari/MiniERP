@@ -17,6 +17,10 @@ const sortSelect = document.getElementById("sortSelect");
 const chartCanvas =
     document.getElementById("inventoryChart");
 
+const exportButton = document.getElementById("exportButton");
+const importButton = document.getElementById("importButton");
+const csvFile = document.getElementById("csvFile");
+
 let inventoryChart;
 
 // =========================
@@ -34,6 +38,15 @@ productForm.addEventListener("submit", handleFormSubmit);
 searchInput.addEventListener("input", filterProducts);
 sortSelect.addEventListener("change", sortProducts);
 
+exportButton.addEventListener("click", exportCSV);
+importButton.addEventListener("click", function(){
+
+    csvFile.click();
+
+});
+
+csvFile.addEventListener("change", importCSV);
+
 // =========================
 // Käynnistys
 // =========================
@@ -50,6 +63,12 @@ function handleFormSubmit(event) {
     event.preventDefault();
 
     const product = getProductData();
+
+    if (editingIndex !== null) {
+
+        product.id = products[editingIndex].id;
+
+    }
 
     if (editingIndex === null) {
 
@@ -76,11 +95,15 @@ function getProductData() {
 
     return {
 
-        name: productNameInput.value,
-        quantity: Number(quantityInput.value),
-        price: Number(priceInput.value)
+    id: crypto.randomUUID(),
 
-    };
+    name: productNameInput.value,
+
+    quantity: Number(quantityInput.value),
+
+    price: Number(priceInput.value)
+
+};
 
 }
 
@@ -147,7 +170,7 @@ function createProductRow(product, index) {
 
             products = products.filter(function (item) {
 
-                return item !== product;
+                return item.id !== product.id;
 
             });
 
@@ -346,6 +369,103 @@ function loadProducts() {
 
         products = JSON.parse(savedProducts);
 
+        products.forEach(function(product){
+
+            if(!product.id){
+
+                product.id = crypto.randomUUID();
+
+            }
+
+        });
+
+        saveProducts();
+
     }
+
+}
+
+function exportCSV(){
+
+    let csv = "Tuote,Määrä,Hinta\n";
+
+    products.forEach(function(product){
+
+        csv +=
+            `${product.name},${product.quantity},${product.price}\n`;
+
+    });
+
+    const blob = new Blob([csv],{
+
+        type:"text/csv"
+
+    });
+
+    const url = URL.createObjectURL(blob);
+
+    const link = document.createElement("a");
+
+    link.href = url;
+
+    link.download = "products.csv";
+
+    link.click();
+
+    URL.revokeObjectURL(url);
+
+}
+
+function importCSV(event){
+
+    const file = event.target.files[0];
+
+    if(!file){
+
+        return;
+
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function(e){
+
+        const rows = e.target.result.split("\n");
+
+        rows.shift();
+
+        rows.forEach(function(row){
+
+            if(row.trim()===""){
+
+                return;
+
+            }
+
+            const values = row.split(",");
+
+            products.push({
+
+                id: crypto.randomUUID(),
+
+                name: values[0],
+
+                quantity: Number(values[1]),
+
+                price: Number(values[2])
+
+            });
+
+        });
+
+        saveProducts();
+
+        renderProducts();
+
+        alert("CSV tuotu onnistuneesti!");
+
+    };
+
+    reader.readAsText(file);
 
 }
