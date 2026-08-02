@@ -1,12 +1,27 @@
 # Mini ERP
 
-Yksinkertainen selainpohjainen varastonhallintasovellus, joka on luotu web-kehityksen opettelua varten.
+Yksinkertainen selainpohjainen varastonhallintasovellus, jonka toteutin web-kehityksen osaamiseni kehittämiseksi.
+
+## Ominaisuudet
+
+- Tuotteiden lisääminen
+- Tuotteiden muokkaaminen
+- Tuotteiden poistaminen
+- Hakutoiminto
+- Lajittelu
+- Dashboard
+- Kaavio
+- LocalStorage-tallennus
+- CSV-tuonti ja -vienti
+- Responsiivinen käyttöliittymä.
 
 ## Teknologiat
 
 - HTML
 - CSS
 - JavaScript
+- Chart.js
+- LocalStorage API
 
 ## Kehitysympäristö
 
@@ -14,42 +29,9 @@ Yksinkertainen selainpohjainen varastonhallintasovellus, joka on luotu web-kehit
 - Git
 - GitHub
 
-## Ominaisuudet
-
-- Tuotehallinta (tulossa pian)
-- Varaston seuranta (tulossa pian)
-- Haku (tulossa pian)
-
 ## Oppimistavoitteet
 
-- JavaScriptin harjoittelu
+- Web-kehityksen harjoittelu
 - Gitin opettelu
 - GitHubin opettelu
 - Portfolioprojektin toteuttaminen
-
-## Tila
-
-Työn alla
-
-## Roadmap
-
-### Versio 1
-
-- Lisää tuotteet
-- Näytä tuotteet
-
-### Versio 2
-
-- Poista tuotteet
-
-### Versio 3
-
-- Muokkaa tuotteita
-
-## Versio 4
-
-- Etsi tuotteita
-
-## Versio 5
-
-- Tallenna tuotteet (LocalStorage)
